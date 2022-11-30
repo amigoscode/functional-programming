@@ -1,24 +1,21 @@
 package com.amigoscode;
 
-import java.util.List;
 import java.util.function.Function;
-import java.util.stream.Collectors;
 
 public class Main {
     public static void main(String[] args) {
-        System.out.println(incrementByOne(1));
-        System.out.println(incrementByOneFunc.apply(1));
+        Function<Integer, Integer> combinedFunction =
+                incrementByOneFunc.andThen(doubleFunc);
 
-        List<Integer> integers = List.of(1, 2, 3)
-                .stream()
-                .map(Main::incrementByOne)
-                .collect(Collectors.toList());
-
-        System.out.println(integers);
+        System.out.println(combinedFunction.apply(1));
+        System.out.println(combinedFunction.apply(3));
     }
 
     static Function<Integer, Integer> incrementByOneFunc =
             n -> n + 1;
+
+    static Function<Integer, Integer> doubleFunc =
+            n -> n * 2;
 
     static int incrementByOne (int n) {
         return n + 1;
