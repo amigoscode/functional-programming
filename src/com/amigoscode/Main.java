@@ -1,36 +1,45 @@
 package com.amigoscode;
 
-import com.amigoscode.PersonRegistrationValidator.ValidationResult;
+import java.util.function.Consumer;
 
 public class Main {
+
     public static void main(String[] args) {
-
-        Person jamila = new Person(
-                "Jamila",
-                "+0000000",
-                "jamila@gmail.com"
-        );
-
-        Person alex = new Person(
-                "Alex",
-                "+0000000",
-                "alex@gmail.com"
-        );
-
-        PersonRegistrationValidator validator =
-                PersonRegistrationValidator
-                        .isEmailTaken()
-                        .and(PersonRegistrationValidator.isEmailValid())
-                        .and(PersonRegistrationValidator.isPhoneNumberValid());
-
-        ValidationResult result =
-                validator.apply(jamila);
-
-        if (result != ValidationResult.SUCCESS) {
-        }
-
-        System.out.println(result);
-        System.out.println(validator.apply(alex));
-
+        hello("Alex", "Jones", input -> {
+            System.out.println(input + " you must have last name");
+        });
     }
+
+    /*
+     const cb = (firstName) => {
+        console.log(firstName + " you must have last name")
+    }*/
+
+    static Consumer<String> cb = input ->
+            System.out.println(input + " you must have last name");
+
+    static void hello(String firstName,
+                      String lastName,
+                      Consumer<String> callback) {
+        System.out.println(firstName);
+        if (lastName != null) {
+            System.out.println(lastName);
+        } else {
+            callback.accept(firstName);
+        }
+    }
+
+    /*
+    const hello = (firstName, lastName, callback) => {
+        console.log(firstName);
+        if (lastName) {
+            console.log(lastName);
+        } else {
+            callback(firstName);
+        }
+    }
+
+    const cb = (firstName) => {
+        console.log(firstName + " you must have last name")
+    }*/
 }
