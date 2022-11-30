@@ -1,28 +1,20 @@
 package com.amigoscode;
 
-import java.util.function.Predicate;
+import java.util.List;
+import java.util.function.Supplier;
 
 public class Main {
     public static void main(String[] args) {
-        var email = "hello@amigoscode.com";
-        // System.out.println(isValidEmail(email));
-        System.out.println(isValidEmailPredicate.test(email));
-
-        boolean test = isValidEmailPredicate
-                .and(containsDotPredicate).test(email);
-
-        System.out.println(test);
-
+        System.out.println(getUrlSupplier.get());
     }
 
-    static Predicate<String> isValidEmailPredicate =
-            email -> email.contains("@");
+    static Supplier<List<String>> getUrlSupplier =
+            () -> {
+                // logic
+                return List.of("https://amigoscode.com");
+            };
 
-    static Predicate<String> containsDotPredicate =
-            email -> email.contains(".");
-
-    static boolean isValidEmail(String email) {
-        return email.contains("@");
+    static String getUrl() {
+        return "https://amigoscode.com";
     }
-
 }
