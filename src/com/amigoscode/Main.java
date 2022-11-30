@@ -1,21 +1,15 @@
 package com.amigoscode;
 
+import java.util.List;
+import java.util.function.Consumer;
+
 public class Main {
     public static void main(String[] args) {
-        EmailSender gmail = (from, to) -> {
-            System.out.println("Sending email using Gmail");
-            return false;
-        };
+        List<String> names = List.of("Jamila", "Alex", "Mariam");
 
-        EmailSender hotmail = (from, to) -> {
-            // logic
-            var isValid = to.contains("@");
-            // more logic
-            System.out.println("Sending email using Hotmail");
-            return true;
-        };
+        Consumer<String> stringConsumer = System.out::println;
 
-        boolean wasEmailSent = gmail.send("hello@amigocode.com", "alex@gmail.com");
-        hotmail.send("hello@amigocode.com", "jamila@gmail.com");
+        // names.forEach(stringConsumer);
+         names.forEach(System.out::println);
     }
 }
