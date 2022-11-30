@@ -1,15 +1,26 @@
 package com.amigoscode;
 
 import java.util.List;
-import java.util.function.Consumer;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class Main {
     public static void main(String[] args) {
-        List<String> names = List.of("Jamila", "Alex", "Mariam");
+        System.out.println(incrementByOne(1));
+        System.out.println(incrementByOneFunc.apply(1));
 
-        Consumer<String> stringConsumer = System.out::println;
+        List<Integer> integers = List.of(1, 2, 3)
+                .stream()
+                .map(Main::incrementByOne)
+                .collect(Collectors.toList());
 
-        // names.forEach(stringConsumer);
-         names.forEach(System.out::println);
+        System.out.println(integers);
+    }
+
+    static Function<Integer, Integer> incrementByOneFunc =
+            n -> n + 1;
+
+    static int incrementByOne (int n) {
+        return n + 1;
     }
 }
