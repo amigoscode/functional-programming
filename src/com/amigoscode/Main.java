@@ -1,21 +1,36 @@
 package com.amigoscode;
 
-import java.util.List;
+import com.amigoscode.PersonRegistrationValidator.ValidationResult;
 
 public class Main {
     public static void main(String[] args) {
 
-        EmailValidator emailValidator = new EmailValidator();
-
-        List<String> emails = List.of(
-                "hello@gmail.com",
-                "hellogmail.com"
+        Person jamila = new Person(
+                "Jamila",
+                "+0000000",
+                "jamila@gmail.com"
         );
 
-        emails.forEach(email -> {
-            var isValid = emailValidator.apply(email);
-            System.out.println("Email %s is valid: %s".formatted(email, isValid));
-        });
+        Person alex = new Person(
+                "Alex",
+                "+0000000",
+                "alex@gmail.com"
+        );
+
+        PersonRegistrationValidator validator =
+                PersonRegistrationValidator
+                        .isEmailTaken()
+                        .and(PersonRegistrationValidator.isEmailValid())
+                        .and(PersonRegistrationValidator.isPhoneNumberValid());
+
+        ValidationResult result =
+                validator.apply(jamila);
+
+        if (result != ValidationResult.SUCCESS) {
+        }
+
+        System.out.println(result);
+        System.out.println(validator.apply(alex));
 
     }
 }
