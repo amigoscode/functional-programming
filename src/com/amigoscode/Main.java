@@ -1,20 +1,21 @@
 package com.amigoscode;
 
 import java.util.List;
-import java.util.function.Supplier;
 
 public class Main {
     public static void main(String[] args) {
-        System.out.println(getUrlSupplier.get());
-    }
 
-    static Supplier<List<String>> getUrlSupplier =
-            () -> {
-                // logic
-                return List.of("https://amigoscode.com");
-            };
+        EmailValidator emailValidator = new EmailValidator();
 
-    static String getUrl() {
-        return "https://amigoscode.com";
+        List<String> emails = List.of(
+                "hello@gmail.com",
+                "hellogmail.com"
+        );
+
+        emails.forEach(email -> {
+            var isValid = emailValidator.apply(email);
+            System.out.println("Email %s is valid: %s".formatted(email, isValid));
+        });
+
     }
 }
